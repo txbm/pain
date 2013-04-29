@@ -4,7 +4,7 @@ setup(name='pain',
       version='0.1',
       description='A scaffolding tool to mitigate the pain of setting up a new project.',
       classifiers=[
-      'Development Status :: 1 - Alpha',
+      'Development Status :: 3 - Alpha',
       'Environment :: Console',
       'Intended Audience :: Developers',
       'Programming Language :: Python'
