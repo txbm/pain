@@ -1,5 +1,4 @@
-import os
-from cuisine import text_template, dir_ensure, file_write, mode_local
+import os, string
 from .files import *
 
 ''' Abstract scaffold class '''
@@ -18,15 +17,16 @@ class Scaffold(object):
 		self.files[path].append(f)
 
 	def write(self, root_dir):
-		with mode_local():
-			if self.config.get('is_package'):
-				root_dir = root_dir + '/' + self.config.get('name')
-			for path, files in self.files.iteritems():
+		if self.config.get('is_package'):
+			root_dir = os.path.join(root_dir, self.config.get('name'))
+		for path, files in self.files.iteritems():
 				for f in files:
-					write_path = '%s%s' % (root_dir, os.path.join(text_template(path, self.config), f.name))
-					dir_ensure(os.path.dirname(write_path), recursive=True)
+					write_path = '%s%s' % (root_dir, os.path.join(string.Template(path).safe_substitute(**self.config), f.name))
+					if not os.path.exists(os.path.dirname(write_path)):
+						os.makedirs(os.path.dirname(write_path))
 					text = f.template(self.config)
-					file_write(write_path, text)
+					with open(write_path, 'w+') as f:
+						f.write(text)
 
 class Default(Scaffold):
 

@@ -1,5 +1,4 @@
-from cuisine import text_template
-
+import string
 ''' Abstract File Class '''
 
 class File(object):
@@ -9,7 +8,7 @@ class File(object):
 		self.content = ''
 
 	def template(self, values):
-		return text_template(self.content, values)
+		return string.Template(self.content).safe_substitute(**values)
 
 class SetupPy(File):
 
