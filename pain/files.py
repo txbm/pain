@@ -1,4 +1,15 @@
-from . import File
+from cuisine import text_template
+
+''' Abstract File Class '''
+
+class File(object):
+
+	def __init__(self, name):
+		self.name = name
+		self.content = ''
+
+	def template(self, values):
+		return text_template(self.content, values)
 
 class SetupPy(File):
 
@@ -10,7 +21,7 @@ class SetupPy(File):
 			setup(
 				name='$name',
 				version='0.1',
-				description=$description,
+				description='$description',
 				classifiers=[],
 				keywords='',
 				author='$author',
