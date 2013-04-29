@@ -4,4 +4,4 @@ include TODO.md
 include requirements.txt
 include setup.cfg
 include setup.py
-recursive-include pain/*
+recursive-include pain/ *
